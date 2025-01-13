@@ -1,11 +1,9 @@
 package it.polito.wa2.g13.crmanalytics.services
 
 import it.polito.wa2.g13.crmanalytics.data.JobOffer
-import it.polito.wa2.g13.crmanalytics.dtos.DebeziumPayloadDTO
-import it.polito.wa2.g13.crmanalytics.dtos.JobOfferDTO
-import it.polito.wa2.g13.crmanalytics.dtos.JobOfferFilterDTO
+import it.polito.wa2.g13.crmanalytics.dtos.*
 import it.polito.wa2.g13.crmanalytics.repositories.JobOfferRepository
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.reactive.asFlow
 import kotlinx.coroutines.reactor.awaitSingle
 import org.slf4j.LoggerFactory
@@ -21,11 +19,17 @@ class JobOfferServiceImpl(
 
     override suspend fun create(jobOffer: DebeziumPayloadDTO<JobOfferDTO>): JobOffer {
         val newJob = jobOfferRepository.insert(JobOffer.from(jobOffer)).awaitSingle()
-        logger.info("Created ${newJob::class.simpleName}@${newJob.id}")
+        logger.info("Created ${newJob::class.qualifiedName}@${newJob.id}")
         return newJob
     }
 
-    override suspend fun count(filter: JobOfferFilterDTO): Long {
-        return jobOfferRepository.countByValueOp(filter.op).asFlow().first()
+    override suspend fun count(operation: Operation): Long {
+        return jobOfferRepository.countByValueOp(operation).awaitSingle()
+    }
+
+    override fun countBy(filter: JobOfferFilterDTO): Flow<JobOfferQueryDTO> {
+        return jobOfferRepository
+            .countByFilter(filter.base, filter.op, filter.group)
+            .asFlow()
     }
 }
