@@ -5,15 +5,10 @@ spring:
     name: crm-analytics
   kafka:
     consumer:
-
       group-id: crm-analytics-consumer
       auto-offset-reset: earliest
-      #      key-deserializer: org.springframework.kafka.support.serializer.StringDeserializer
+#      key-deserializer: org.springframework.kafka.support.serializer.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-  #      properties:
-  #        spring.json.value.default.type: it.polito.wa2.g13.crmanalytics.dtos.DebeziumPayloadDTO
-  #        spring.json.add.type.headers: true
-  #        spring.json.use.type.headers: false
 
   data:
     mongodb:
@@ -23,9 +18,22 @@ spring:
       database: mydatabase
 
 server:
-  port: 8765
+  port: ${PORT:8765}
 
 kafka-config:
   job-offer-topic: "dbserver1.public.job_offer"
   job-offer-skills-topic: "test2"
 
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    csrf:
+      enabled: false
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+  instance:
+    preferIpAddress: true
