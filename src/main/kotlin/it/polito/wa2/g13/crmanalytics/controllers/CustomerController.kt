@@ -23,7 +23,7 @@ class CustomerController(
     }
 
     @GetMapping("/filter")
-    suspend fun getAllByFilter(@Valid filter: GenericFilterDTO): Flow<GenericStatDTO> {
+    fun getAllByFilter(@Valid filter: GenericFilterDTO): Flow<GenericStatDTO> {
         return customerService.countBy(filter)
     }
 }

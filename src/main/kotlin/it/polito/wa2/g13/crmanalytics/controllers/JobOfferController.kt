@@ -22,7 +22,7 @@ class JobOfferController(
     }
 
     @GetMapping("/filter")
-    suspend fun getAllByFilter(@Valid filter: GenericFilterDTO): Flow<GenericStatDTO> {
+    fun getAllByFilter(@Valid filter: GenericFilterDTO): Flow<GenericStatDTO> {
         return jobOfferService.countBy(filter)
     }
 }

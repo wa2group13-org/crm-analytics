@@ -22,7 +22,7 @@ class ProfessionalController(
     }
 
     @GetMapping("/filter")
-    suspend fun getAllByFilter(@Valid filter: GenericFilterDTO): Flow<GenericStatDTO> {
+    fun getAllByFilter(@Valid filter: GenericFilterDTO): Flow<GenericStatDTO> {
         return professionalService.countBy(filter)
     }
 }

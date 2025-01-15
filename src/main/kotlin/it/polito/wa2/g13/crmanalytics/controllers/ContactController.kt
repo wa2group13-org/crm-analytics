@@ -22,7 +22,7 @@ class ContactController(
     }
 
     @GetMapping("/filter")
-    suspend fun getAllByFilter(@Valid filter: GenericFilterDTO): Flow<GenericStatDTO> {
+    fun getAllByFilter(@Valid filter: GenericFilterDTO): Flow<GenericStatDTO> {
         return contactService.countBy(filter)
     }
 }

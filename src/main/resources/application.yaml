@@ -1,13 +1,13 @@
 spring:
   profiles:
-    active: dev, no-security
+    active: dev, no-security, api-docs
   application:
     name: crm-analytics
   kafka:
     consumer:
       group-id: crm-analytics-consumer
       auto-offset-reset: earliest
-#      key-deserializer: org.springframework.kafka.support.serializer.StringDeserializer
+      #      key-deserializer: org.springframework.kafka.support.serializer.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
 
   data:
@@ -30,6 +30,9 @@ springdoc:
   swagger-ui:
     csrf:
       enabled: false
+
+openapi:
+  base-url: ${OPENAPI_BASE_URL:http://localhost:${server.port}}
 
 eureka:
   client:
