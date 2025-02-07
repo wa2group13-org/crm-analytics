@@ -22,7 +22,10 @@ server:
 
 kafka-config:
   job-offer-topic: "dbserver1.public.job_offer"
-  job-offer-skills-topic: "test2"
+  contact-topic: "dbserver1.public.contact"
+  customer-topic: "dbserver1.public.customer"
+  message-topic: "dbserver1.public.message"
+  professional-topic: "dbserver1.public.professional"
 
 springdoc:
   api-docs:

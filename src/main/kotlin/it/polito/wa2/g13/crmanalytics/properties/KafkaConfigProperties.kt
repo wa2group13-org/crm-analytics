@@ -12,7 +12,7 @@ class KafkaConfigProperties {
      * Topic of job_offer table
      */
     lateinit var jobOfferTopic: String
-    lateinit var jobOfferSkillsTopic: String
+//    lateinit var jobOfferSkillsTopic: String
     lateinit var contactTopic: String
     lateinit var messageTopic: String
     lateinit var professionalTopic: String
