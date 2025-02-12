@@ -17,7 +17,7 @@ plugins {
 val springCloudVersion by extra("2023.0.2")
 
 group = "it.polito.wa2.g13"
-version = "1.1.1"
+version = "1.1.2"
 
 java {
 	sourceCompatibility = JavaVersion.VERSION_21

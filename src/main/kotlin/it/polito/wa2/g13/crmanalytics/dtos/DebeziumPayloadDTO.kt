@@ -1,17 +1,29 @@
 package it.polito.wa2.g13.crmanalytics.dtos
 
+import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.databind.PropertyNamingStrategies
 import com.fasterxml.jackson.databind.annotation.JsonNaming
 import jakarta.validation.Valid
 
-enum class Operation {
+enum class Operation(private val value: String) {
     @JsonProperty("c")
-    C,
+    C("c"),
+
     @JsonProperty("u")
-    U,
+    U("u"),
+
     @JsonProperty("d")
-    D,
+    D("d");
+
+    companion object {
+        @JsonCreator
+        @JvmStatic
+        fun from(value: String): Operation {
+            return entries.find { it.value == value }
+                ?: throw IllegalArgumentException("Invalid value: $value")
+        }
+    }
 }
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)

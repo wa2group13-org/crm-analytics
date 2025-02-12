@@ -28,10 +28,6 @@ class JobOfferServiceImpl(
     }
 
     override fun countBy(filter: GenericFilterDTO): Flow<GenericStatDTO> {
-        logger.info(filter.toString())
-        logger.info(filter.base::class.qualifiedName)
-        filter.base.toInstant().toEpochMilli()
-
         return jobOfferRepository
             .countByFilter(filter.base, filter.op, filter.group)
             .asFlow()
