@@ -35,7 +35,8 @@ class SecurityConfig(
                         "/API/contacts/**",
                         "/API/professionals/**",
                         "/API/customers/**",
-                        "/API/joboffers/**"
+                        "/API/jobs/**",
+                        "/API/message/**",
                     )
                     .permitAll()
 
