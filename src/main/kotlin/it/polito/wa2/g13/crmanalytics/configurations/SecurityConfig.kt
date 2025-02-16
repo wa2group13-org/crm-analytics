@@ -28,7 +28,8 @@ class SecurityConfig(
                     it.pathMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll()
                 }
 
-                it.anyExchange().hasRole("ADMIN")
+                it.pathMatchers("/**").hasRole("ADMIN")
+                it.anyExchange().denyAll()
             }
             .oauth2ResourceServer { it.jwt {} }
             .csrf { it.disable() }
