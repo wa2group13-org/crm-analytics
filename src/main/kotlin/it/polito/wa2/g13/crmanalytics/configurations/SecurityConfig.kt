@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Profile
 import org.springframework.core.env.Environment
 import org.springframework.core.env.Profiles
-import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity
 import org.springframework.security.config.web.server.ServerHttpSecurity
@@ -29,23 +28,7 @@ class SecurityConfig(
                     it.pathMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll()
                 }
 
-                it
-                    .pathMatchers(
-                        HttpMethod.GET,
-                        "/API/contacts/**",
-                        "/API/professionals/**",
-                        "/API/customers/**",
-                        "/API/jobs/**",
-                        "/API/message/**",
-                    )
-                    .permitAll()
-
-                it.pathMatchers(HttpMethod.GET).hasRole("OPERATOR")
-                it.pathMatchers(HttpMethod.POST).hasRole("OPERATOR")
-                it.pathMatchers(HttpMethod.PUT).hasRole("OPERATOR")
-                it.pathMatchers(HttpMethod.DELETE).hasRole("ADMIN")
-
-                it.anyExchange().authenticated()
+                it.anyExchange().hasRole("ADMIN")
             }
             .oauth2ResourceServer { it.jwt {} }
             .csrf { it.disable() }
